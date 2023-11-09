@@ -12,6 +12,7 @@
             steps { 
                 echo 'Building...'     
             }
+        }
         
         stage('Test') { 
             steps { 

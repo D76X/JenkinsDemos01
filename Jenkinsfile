@@ -1,6 +1,8 @@
 ﻿pipeline {
     // example of declarative pipeline
     // https://stackoverflow.com/questions/42113655/no-such-dsl-method-stages
+    // https://www.jenkins.io/doc/book/pipeline/syntax/
+    // https://www.jenkins.io/doc/book/pipeline/getting-started/
     agent any 1
     stages { 
         stage('SCM') { 
@@ -26,6 +28,7 @@
         }
     }
 }
+
 /*
 example of scripted pipeline in Groovy
 

@@ -43,8 +43,11 @@ pipeline {
                 // How to use sudo inside a docker container?
                 // https://stackoverflow.com/questions/25845538/how-to-use-sudo-inside-a-docker-container
 
-                
-                withDotNet(sdk: "sdk6") {
+                // .NET SDK Support
+                // https://plugins.jenkins.io/dotnet-sdk/
+                //https://www.jenkins.io/doc/pipeline/steps/dotnet-sdk/#withdotnet-with-net
+                //withDotNet(sdk: "sdk6") {
+                withDotNet() {
                     sh 'dotnet --version' 
                     sh 'dotnet build ConsoleApp1'       
                 }                

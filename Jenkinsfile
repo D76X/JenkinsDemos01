@@ -13,18 +13,28 @@ pipeline {
         stage('SCM') { 
             steps { 
                 echo 'Gathering code from version control'     
+
+                // this works!
                 git branch: 'main', url:'https://github.com/D76X/JenkinsDemos01.git'
+                
+                // fails because it does not replace ${branch} with main? 
                 //git branch: '${branch}', url:'https://github.com/D76X/JenkinsDemos01.git'
+                
+                // fails because it needs to know the revision=branch
                 //git url:'https://github.com/D76X/JenkinsDemos01.git'
             }
         }
          stage('Build') { 
             steps { 
                 echo 'Building...' 
+                
+                // this fails in teh container
+                /*
                 withDotNet(sdk: "sdk6") {
                     sh 'dotnet --version' 
                     sh 'dotnet build ConsoleApp1'       
-                }    
+                } 
+                */   
                 echo 'Building new feature' 
             }
         }        

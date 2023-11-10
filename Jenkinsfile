@@ -53,7 +53,9 @@ pipeline {
                     sh 'dotnet build ConsoleApp1'       
                 }
                 */
+                
                 sh 'dotnet --version'                 
+                sh 'dotnet build ConsoleApp1'       
 
                 echo 'Building new feature' 
             }

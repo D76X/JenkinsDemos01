@@ -18,7 +18,12 @@ pipeline {
         }
          stage('Build') { 
             steps { 
-                echo 'Building...'     
+                echo 'Building...' 
+                withDotNet(sdk: "sdk6") {
+                    sh 'dotnet --version' 
+                    sh 'dotnet build ConsoleApp1'       
+                }    
+                echo 'Building new feature' 
             }
         }        
         stage('Test') { 

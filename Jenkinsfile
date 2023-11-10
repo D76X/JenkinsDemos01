@@ -47,10 +47,13 @@ pipeline {
                 // https://plugins.jenkins.io/dotnet-sdk/
                 //https://www.jenkins.io/doc/pipeline/steps/dotnet-sdk/#withdotnet-with-net
                 //withDotNet(sdk: "sdk6") {
+                /*
                 withDotNet() {
                     sh 'dotnet --version' 
                     sh 'dotnet build ConsoleApp1'       
-                }                
+                }
+                */
+                sh 'dotnet --version'                 
 
                 echo 'Building new feature' 
             }

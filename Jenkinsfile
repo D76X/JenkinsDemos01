@@ -13,8 +13,9 @@ pipeline {
         stage('SCM') { 
             steps { 
                 echo 'Gathering code from version control'     
+                git branch: 'main', url:'https://github.com/D76X/JenkinsDemos01.git'
                 //git branch: '${branch}', url:'https://github.com/D76X/JenkinsDemos01.git'
-                git url:'https://github.com/D76X/JenkinsDemos01.git'
+                //git url:'https://github.com/D76X/JenkinsDemos01.git'
             }
         }
          stage('Build') { 

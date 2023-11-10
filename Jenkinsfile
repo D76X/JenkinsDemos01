@@ -14,6 +14,9 @@ pipeline {
             steps { 
                 echo 'Gathering code from version control'     
 
+                // ERROR: Couldn't find any revision to build. Verify the repository and branch configuration for this job.    
+                // https://groups.google.com/g/jenkinsci-users/c/GAqYQDjyJp4
+
                 // this works!
                 git branch: 'main', url:'https://github.com/D76X/JenkinsDemos01.git'
                 
@@ -28,13 +31,24 @@ pipeline {
             steps { 
                 echo 'Building...' 
                 
-                // this fails in teh container
-                /*
+                // this fails in the container!
+                // https://www.jenkins.io/doc/pipeline/steps/dotnet-sdk/#withdotnet-with-net
+                // From the: Official Jenkins Docker image
+                // Installing more tools 
+                // https://github.com/jenkinsci/docker/tree/master#installing-more-tools
+
+                // adding .net core to docker container with Jenkins
+                // https://stackoverflow.com/questions/48104954/adding-net-core-to-docker-container-with-jenkins
+
+                // How to use sudo inside a docker container?
+                // https://stackoverflow.com/questions/25845538/how-to-use-sudo-inside-a-docker-container
+
+                
                 withDotNet(sdk: "sdk6") {
                     sh 'dotnet --version' 
                     sh 'dotnet build ConsoleApp1'       
-                } 
-                */   
+                }                
+
                 echo 'Building new feature' 
             }
         }        

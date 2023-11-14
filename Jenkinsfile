@@ -28,36 +28,34 @@ pipeline {
             }
         }
          stage('Build') { 
-            steps { 
-                echo 'Building...' 
-                
-                // this fails in the container!
-                // https://www.jenkins.io/doc/pipeline/steps/dotnet-sdk/#withdotnet-with-net
-                // From the: Official Jenkins Docker image
-                // Installing more tools 
-                // https://github.com/jenkinsci/docker/tree/master#installing-more-tools
-
-                // adding .net core to docker container with Jenkins
-                // https://stackoverflow.com/questions/48104954/adding-net-core-to-docker-container-with-jenkins
-
-                // How to use sudo inside a docker container?
-                // https://stackoverflow.com/questions/25845538/how-to-use-sudo-inside-a-docker-container
-
-                // .NET SDK Support
-                // https://plugins.jenkins.io/dotnet-sdk/
-                //https://www.jenkins.io/doc/pipeline/steps/dotnet-sdk/#withdotnet-with-net
-                //withDotNet(sdk: "sdk6") {
-                /*
-                withDotNet() {
-                    sh 'dotnet --version' 
-                    sh 'dotnet build ConsoleApp1'       
+            steps {                 
+                try{
+                    echo 'Building...'
+                    sh 'dotnet --version'                 
+                    sh 'dotnet build ConsoleApp1'
+                    echo 'Building new feature'                
                 }
-                */
-                
-                sh 'dotnet --version'                 
-                sh 'dotnet build ConsoleApp1'       
+                catch(ex){
+                    
+                    // this catch is not strikly necessary it is only to demo
+                    // how to deal with exceptions in Groovy. Without a catch
+                    // the build would fail.
+                    // Jenkins also fails any step that runs a script that 
+                    // retunrs a non zeor exit code i.e. a test stage.
 
-                echo 'Building new feature' 
+                    echo 'Something went wrong'        
+                    echo ex.ToString()
+
+                    // this is not stricktly necessary but it gives the idea
+                    // of how one may manually fail a step.
+                    currentBuild.result = 'FAILURE'
+
+                    // do not swallow the exception!
+                    throw e;
+                }
+                finally{
+                    // do any cleanup..
+                }               
             }
         }        
         stage('Test') { 

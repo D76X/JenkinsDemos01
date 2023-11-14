@@ -7,6 +7,9 @@
 // this file must be UTF-8 for Jenkins to be able to parse it appropriately.
 // https://stackoverflow.com/questions/50718320/java-lang-nosuchmethoderror-no-such-dsl-method-pipeline-found-when-running
 
+// Pipeline: Basic Steps
+// https://www.jenkins.io/doc/pipeline/steps/workflow-basic-steps/#pipeline-basic-steps
+
 pipeline {    
     agent any
     stages { 
@@ -30,12 +33,15 @@ pipeline {
         stage('Build') {             
             steps {
 
+                // this is how you may embed scripted steps into a declarative pipeline
+                // it also illustrate how to hadle exceptions and finally clauses.
+                // https://stackoverflow.com/questions/42718785/how-to-throw-exception-in-jenkins-pipeline
                 script {
                     try {
-                    echo 'Building...'
-                    sh 'dotnet --version'                 
-                    sh 'dotnet build ConsoleApp1'
-                    echo 'Building new feature'                
+                        echo 'Building...'
+                        sh 'dotnet --version'                 
+                        sh 'dotnet build ConsoleApp1'
+                        echo 'Building new feature'                
                     }
                     catch(ex) {
                         
@@ -60,6 +66,18 @@ pipeline {
                     } 
                 }                 
                              
+            }
+            post {
+                success {
+                    script {
+                        echo "Build step success"
+                    }
+                }
+                failure {
+                    script {
+                        echo "Build step failure"
+                    }
+                }
             }
         }        
         stage('Test') { 

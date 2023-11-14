@@ -27,15 +27,16 @@ pipeline {
                 //git url:'https://github.com/D76X/JenkinsDemos01.git'
             }
         }
-         stage('Build') { 
-            steps {                 
-                try{
+        stage('Build') { 
+            steps {
+                                 
+                try {
                     echo 'Building...'
                     sh 'dotnet --version'                 
                     sh 'dotnet build ConsoleApp1'
                     echo 'Building new feature'                
                 }
-                catch(ex){
+                catch(ex) {
                     
                     // this catch is not strikly necessary it is only to demo
                     // how to deal with exceptions in Groovy. Without a catch
@@ -51,7 +52,7 @@ pipeline {
                     currentBuild.result = 'FAILURE'
 
                     // do not swallow the exception!
-                    throw e;
+                    throw e
                 }
                 finally{
                     // do any cleanup..

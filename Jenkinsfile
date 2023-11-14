@@ -27,36 +27,39 @@ pipeline {
                 //git url:'https://github.com/D76X/JenkinsDemos01.git'
             }
         }
-        stage('Build') { 
+        stage('Build') {             
             steps {
-                                 
-                try {
+
+                script {
+                    try {
                     echo 'Building...'
                     sh 'dotnet --version'                 
                     sh 'dotnet build ConsoleApp1'
                     echo 'Building new feature'                
-                }
-                catch(ex) {
-                    
-                    // this catch is not strikly necessary it is only to demo
-                    // how to deal with exceptions in Groovy. Without a catch
-                    // the build would fail.
-                    // Jenkins also fails any step that runs a script that 
-                    // retunrs a non zeor exit code i.e. a test stage.
+                    }
+                    catch(ex) {
+                        
+                        // this catch is not strikly necessary it is only to demo
+                        // how to deal with exceptions in Groovy. Without a catch
+                        // the build would fail.
+                        // Jenkins also fails any step that runs a script that 
+                        // retunrs a non zeor exit code i.e. a test stage.
 
-                    echo 'Something went wrong'        
-                    echo ex.ToString()
+                        echo 'Something went wrong'        
+                        echo ex.ToString()
 
-                    // this is not stricktly necessary but it gives the idea
-                    // of how one may manually fail a step.
-                    currentBuild.result = 'FAILURE'
+                        // this is not stricktly necessary but it gives the idea
+                        // of how one may manually fail a step.
+                        currentBuild.result = 'FAILURE'
 
-                    // do not swallow the exception!
-                    throw e
-                }
-                finally{
-                    // do any cleanup..
-                }               
+                        // do not swallow the exception!
+                        throw e
+                    }
+                    finally{
+                        // do any cleanup..
+                    } 
+                }                 
+                             
             }
         }        
         stage('Test') { 
@@ -88,7 +91,37 @@ node {
        echo 'Gathering code from version control'     
     }
     stage('Build') {
-       echo 'Building...'     
+       
+       // use try catch in a scripted pipeline!
+       // https://stackoverflow.com/questions/44003788/try-catch-block-in-jenkins-pipeline-script#:~:text=try%2Fcatch%20is%20scripted%20syntax,inside%20stage%20%3Esteps%20%3Escript.
+
+       try {
+            echo 'Building...'
+            sh 'dotnet --version'                 
+            sh 'dotnet build ConsoleApp1'
+            echo 'Building new feature'                
+        }
+        catch(ex) {
+            
+            // this catch is not strikly necessary it is only to demo
+            // how to deal with exceptions in Groovy. Without a catch
+            // the build would fail.
+            // Jenkins also fails any step that runs a script that 
+            // retunrs a non zeor exit code i.e. a test stage.
+
+            echo 'Something went wrong'        
+            echo ex.ToString()
+
+            // this is not stricktly necessary but it gives the idea
+            // of how one may manually fail a step.
+            currentBuild.result = 'FAILURE'
+
+            // do not swallow the exception!
+            throw e
+        }
+        finally{
+            // do any cleanup..
+        }     
     }
     stage('Deploy') {
        echo 'Deploying...'     

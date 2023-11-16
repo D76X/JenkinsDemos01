@@ -1,0 +1,21 @@
+// Declarative Pipeline
+// https://github.com/darinpope/jenkins-example-docker/blob/main/Jenkinsfile-2
+pipeline {    
+    agent any
+    stages { 
+        stage('Stage1') { 
+            steps { 
+                echo 'Stage1: Jenkinsfile-Docker-1'                     
+            } 
+        }       
+        stage('Stage2') {
+            agent {
+                docker { image '82bb9f49bf047ae6666c9fedc2f9245be21e137b07039b67cac4e5aa7c4d92b6' }
+            }
+            steps {
+                echo 'Stage2: Jenkinsfile-Docker-1'                     
+                //sh 'node --version'
+            }
+        }
+    }    
+}

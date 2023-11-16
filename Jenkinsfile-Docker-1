@@ -10,7 +10,13 @@ pipeline {
         }       
         stage('Stage2') {
             agent {
-                docker { image '82bb9f49bf047ae6666c9fedc2f9245be21e137b07039b67cac4e5aa7c4d92b6' }
+                
+                //                          
+                docker { image 'node:16-alpine' }
+                
+                // the id of the image does not work..
+                //docker { image '82bb9f49bf047ae6666c9fedc2f9245be21e137b07039b67cac4e5aa7c4d92b6' }
+                
             }
             steps {
                 echo 'Stage2: Jenkinsfile-Docker-1'                     

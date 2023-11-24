@@ -11,7 +11,15 @@ pipeline {
         stage('Stage2') {
             agent {
                 
-                //                          
+                // in this step we just test whether the Jenkins node that 
+                // runs this pipeline can make use of Docker to spin up a 
+                // container from a Linux distribution image.
+                // However, inside this container we do nothing.
+                // The default Registry where the Docker installation on the 
+                // Jenkins node tries to resolve the name of the image is 
+                // DockerHub.
+                // The image 'node:16-alpine' is Apline Linux with NodeJS on
+                // top of it.
                 docker { image 'node:16-alpine' }
                 
                 // the id of the image does not work..

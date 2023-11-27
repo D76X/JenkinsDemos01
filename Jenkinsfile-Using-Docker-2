@@ -4,7 +4,9 @@
 // https://www.jenkins.io/doc/book/pipeline/docker/
 // Using multiple containers within the stages of a pipeline
 pipeline {
-    agent "jenkinsdockerhost"
+    agent {
+        label "jenkinsdockerhost"
+    }
     stages {
         // stage('Back-end') {
         //     agent {

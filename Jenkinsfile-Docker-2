@@ -1,5 +1,6 @@
 // Declarative Pipeline
-https://github.com/darinpope/jenkins-example-docker/blob/main/Jenkinsfile-2
+// https://github.com/darinpope/jenkins-example-docker/blob/main/Jenkinsfile-2
+// https://github.com/jenkinsci/docker/issues/962
 pipeline {
   agent none
   stages {

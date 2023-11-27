@@ -2,6 +2,7 @@
 // This pipeline is found on:
 // Using Docker with Pipeline 
 // https://www.jenkins.io/doc/book/pipeline/docker/
+// Using a single container for the whole pipeline
 pipeline {
     agent {
         docker { image 'node:20.9.0-alpine3.18' }

@@ -1,4 +1,5 @@
 // Declarative Pipeline
+// This pipeline is based on the following:
 // https://github.com/darinpope/jenkins-example-docker/blob/main/Jenkinsfile-2
 pipeline {    
     agent any
@@ -28,7 +29,7 @@ pipeline {
             }
             steps {
                 echo 'Stage2: Jenkinsfile-Docker-1'                     
-                //sh 'node --version'
+                sh 'node --version'
             }
         }
     }    

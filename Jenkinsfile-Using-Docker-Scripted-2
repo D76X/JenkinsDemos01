@@ -1,0 +1,20 @@
+// Scripted Pipeline
+// This pipeline is found on:
+// Using Docker with Pipeline 
+// https://www.jenkins.io/doc/book/pipeline/docker/
+// Using multiple containers within the stages of a pipeline
+node {
+    /* Requires the Docker Pipeline plugin to be installed */
+
+    stage('Back-end') {
+        docker.image('maven:3.9.5-eclipse-temurin-17-alpine').inside {
+            sh 'mvn --version'
+        }
+    }
+
+    stage('Front-end') {
+        docker.image('node:20.10.0-alpine3.18').inside {
+            sh 'node --version'
+        }
+    }
+}

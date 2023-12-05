@@ -1,6 +1,7 @@
 // Declarative Pipeline
 // https://github.com/darinpope/jenkins-example-docker/blob/main/Jenkinsfile-2
 // https://github.com/jenkinsci/docker/issues/962
+// .Net SDKs : https://hub.docker.com/_/microsoft-dotnet-sdk
 pipeline {
   agent none
   stages {
@@ -9,8 +10,8 @@ pipeline {
         docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
       }
       steps {
-        sh 'dotnet --version'  
-        sh 'dotnet build ConsoleApp1'               
+        sh 'dotnet --version'
+        //sh 'dotnet build ConsoleApp1' // this odes not work!
       }
     }
     stage('Back-end') {

@@ -2,13 +2,15 @@
 // https://github.com/darinpope/jenkins-example-docker/blob/main/Jenkinsfile-3
 // https://github.com/jenkinsci/docker/issues/962
 // .Net SDKs : https://hub.docker.com/_/microsoft-dotnet-sdk
+// Pipeline Syntax: dockerfile options.
+// https://www.jenkins.io/doc/book/pipeline/syntax/#common-options
 // Using a single container for the whole pipeline
 pipeline {
     agent {
         agent { dockerfile true } // build an image on the fly with the code to build backe dinto it!
     }
     stages {
-        stage('Test') {
+        stage('Build the .Net assets') {
              steps {
               sh 'dotnet --version'
               sh 'dotnet build ConsoleApp1' // does this work?

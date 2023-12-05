@@ -6,17 +6,15 @@
 // https://www.jenkins.io/doc/book/pipeline/syntax/#common-options
 // Using a single container for the whole pipeline
 pipeline {
-    agent {
-        agent { dockerfile true } // build an image on the fly with the code to build backe dinto it!
-    }
+    agent { dockerfile true } // build an image on the fly with the code to build backe dinto it!    
     stages {
         stage('Build the .Net assets') {
              steps {
               sh 'dotnet --version'
               sh 'dotnet build ConsoleApp1' // does this work?
-            }
-        }
       }
+    }
+  }
 }
 
 // pipeline {

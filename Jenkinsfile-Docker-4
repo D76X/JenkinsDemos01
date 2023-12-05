@@ -1,5 +1,5 @@
 // Declarative Pipeline
-// https://github.com/darinpope/jenkins-example-docker/blob/main/Jenkinsfile-2
+// https://github.com/darinpope/jenkins-example-docker/blob/main/Jenkinsfile-3
 // https://github.com/jenkinsci/docker/issues/962
 // .Net SDKs : https://hub.docker.com/_/microsoft-dotnet-sdk
 pipeline {
@@ -7,11 +7,12 @@ pipeline {
   stages {
     stage('Build the .Net assets') {
       agent {
-        docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
+        //docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
+         agent { dockerfile true } // build an image on the fly with the code to build backe dinto it!
       }
       steps {
         sh 'dotnet --version'
-        //sh 'dotnet build ConsoleApp1' // this does not work there is no code inside the image!
+        sh 'dotnet build ConsoleApp1' // does this work?
       }
     }
     stage('Back-end') {

@@ -19,7 +19,7 @@ node {
     }
 
     stage('Build the Front-end nodejs app') {
-        docker.image('Build the Front-end nodejs app').inside {
+        docker.image('node:16-alpine').inside {
             sh 'node --version'
         }
     }

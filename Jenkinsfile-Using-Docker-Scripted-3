@@ -1,0 +1,26 @@
+// Scripted Pipeline
+// This pipeline is found on:
+// Using Docker with Pipeline 
+// https://www.jenkins.io/doc/book/pipeline/docker/
+// Using multiple containers within the stages of a pipeline
+// Requires the Docker Pipeline plugin to be installed
+node {
+    
+    stage('Build the .Net assets for the back-end and the tools') {
+        docker.image('mcr.microsoft.com/dotnet/sdk:6.0').inside {
+            sh 'dotnet --version'
+        }
+    }
+
+    stage('Build the Java assets for the back-end') {
+        docker.image('maven:3.8.1-adoptopenjdk-11').inside {
+            sh 'mvn --version'
+        }
+    }
+
+    stage('Build the Front-end nodejs app') {
+        docker.image('Build the Front-end nodejs app').inside {
+            sh 'node --version'
+        }
+    }
+}

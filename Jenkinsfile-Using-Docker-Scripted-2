@@ -3,8 +3,8 @@
 // Using Docker with Pipeline 
 // https://www.jenkins.io/doc/book/pipeline/docker/
 // Using multiple containers within the stages of a pipeline
-node {
-    /* Requires the Docker Pipeline plugin to be installed */
+// Requires the Docker Pipeline plugin to be installed
+node {    
 
     stage('Back-end') {
         docker.image('maven:3.9.5-eclipse-temurin-17-alpine').inside {

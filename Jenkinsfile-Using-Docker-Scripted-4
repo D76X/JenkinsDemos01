@@ -10,7 +10,7 @@ node {
     
     stage('Build the .Net assets for the back-end and the tools') {
         
-        def customDotNetImage = docker.build("dotnet-image}")
+        def customDotNetImage = docker.build("dotnet-image}"
         
         customImage.inside {
             sh 'dotnet --version'

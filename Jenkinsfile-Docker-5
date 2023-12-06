@@ -14,7 +14,7 @@ pipeline {
       agent { dockerfile true } // build an image on the fly with the code to build backed into it!    
       steps {
         sh 'dotnet --version'
-        sh 'dotnet build ConsoleApp1' // does this work?
+        sh 'dotnet build ConsoleApp1'
       }
     }
     stage('Build the Java assets for the back-end') {

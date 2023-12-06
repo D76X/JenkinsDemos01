@@ -12,7 +12,7 @@ node {
         
         def customDotNetImage = docker.build("dotnet-image")
         
-        customImage.inside {
+        customDotNetImage.inside {
             sh 'dotnet --version'
             sh 'dotnet build ConsoleApp1'
         }

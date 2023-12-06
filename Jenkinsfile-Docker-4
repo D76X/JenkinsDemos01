@@ -4,47 +4,15 @@
 // .Net SDKs : https://hub.docker.com/_/microsoft-dotnet-sdk
 // Pipeline Syntax: dockerfile options.
 // https://www.jenkins.io/doc/book/pipeline/syntax/#common-options
-// Using a single container for the whole pipeline
+// Using a single container for the whole pipeline: there is only a pipeline level docker image.
 pipeline {
-    agent { dockerfile true } // build an image on the fly with the code to build backe dinto it!    
+    agent { dockerfile true } // build an image on the fly with the code to build backed into it!    
     stages {
         stage('Build the .Net assets') {
              steps {
               sh 'dotnet --version'
-              sh 'dotnet build ConsoleApp1' // does this work?
+              sh 'dotnet build ConsoleApp1' 
       }
     }
   }
 }
-
-// pipeline {
-//   agent none
-//   stages {
-//     stage('Build the .Net assets') {
-//       agent {
-//         //docker { image 'mcr.microsoft.com/dotnet/sdk:6.0' }
-//          agent { dockerfile true } // build an image on the fly with the code to build backe dinto it!
-//       }
-//       steps {
-//         sh 'dotnet --version'
-//         sh 'dotnet build ConsoleApp1' // does this work?
-//       }
-//     }
-//     stage('Back-end') {
-//       agent {
-//         docker { image 'maven:3.8.1-adoptopenjdk-11' }
-//       }
-//       steps {
-//         sh 'mvn --version'
-//       }
-//     }
-//     stage('Front-end') {
-//       agent {
-//         docker { image 'node:16-alpine' }
-//       }
-//       steps {
-//         sh 'node --version'
-//       }
-//     }
-//   }
-// }

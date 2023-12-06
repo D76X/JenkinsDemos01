@@ -5,4 +5,6 @@ COPY . .
 # https://stackoverflow.com/questions/53556623/dotnet-build-permission-denied-in-docker-container-running-jenkins
 # Set the Environment Variable for the DOTNET CLI HOME PATH
 ARG dotnet_cli_home_arg=/tmp/
+ARG xdg_data_home_arg=/tmp
 ENV DOTNET_CLI_HOME=$dotnet_cli_home_arg
+ENV XDG_DATA_HOME=$xdg_data_home_arg

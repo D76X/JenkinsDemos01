@@ -1,0 +1,39 @@
+// Scripted Pipeline
+// This pipeline is found on:
+// Using Docker with Pipeline 
+// https://www.jenkins.io/doc/book/pipeline/docker/
+// Using multiple containers within the stages of a pipeline
+// Requires the Docker Pipeline plugin to be installed
+// in this version we build an image on the fly in order to package into 
+// it the .Net source code that we want to build in the .Net stage.
+node {
+    
+    stage('Build the .Net assets for the back-end and the tools') {
+        
+        def customDotNetImage = docker.build("dotnet-image}")
+        
+        customImage.inside {
+            sh 'dotnet --version'
+            sh 'dotnet build ConsoleApp1'
+        }
+
+        //def customImage = docker.build("my-image:${env.BUILD_ID}")
+
+        // docker.image('mcr.microsoft.com/dotnet/sdk:6.0').inside {
+        //     sh 'dotnet --version'
+        //     sh 'dotnet build ConsoleApp1'
+        // }
+    }
+
+    stage('Build the Java assets for the back-end') {
+        docker.image('maven:3.8.1-adoptopenjdk-11').inside {
+            sh 'mvn --version'
+        }
+    }
+
+    stage('Build the Front-end nodejs app') {
+        docker.image('node:16-alpine').inside {
+            sh 'node --version'
+        }
+    }
+}
